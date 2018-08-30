@@ -1,9 +1,24 @@
 require('dotenv').config()
 const express = require("express");
 const massive = require("massive");
+const bodyParser = require('body-parser')
+const session = require('express-session')
+
+const accountCtrl = require('./controllers/accountCtrl')
 
 const app = express()
-let {CONNECTION_STRING, SERVER_PORT} = process.env
+app.use(bodyParser.json())
+
+
+
+let {CONNECTION_STRING, SERVER_PORT, SESSION_SECRET} = process.env
+app.use(session({
+  secret: SESSION_SECRET,
+  saveUninitialized: true,
+  resave: false,
+}))
+
+app.post('/api/auth/register', accountCtrl.registerAccount)
 
 async function startServer() {
   try {

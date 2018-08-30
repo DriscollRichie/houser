@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Auth.css'
 import logo from '../../assets/auth_logo.png'
+import axios from 'axios'
 
 export default class Auth extends Component {
   state = {
@@ -12,6 +13,18 @@ export default class Auth extends Component {
     this.setState({[key]: value})
   }
 
+  registerUser = async () => {
+    try {
+      console.log('registerUser fn hit')
+      const {username, password} = this.state
+      let {data: user} = await axios.post('/api/auth/register', {username, password})
+      console.log(user)
+      this.props.history.push('/dashboard')
+    } catch(err) {
+      console.error('registerUser function failed in Auth.js:', err)
+    }
+  }
+
   render() {
     return (
       <div id='auth-view'>
@@ -20,13 +33,13 @@ export default class Auth extends Component {
             <img src={logo} alt='logo' id='auth-logo' />
             <div id='auth-input-section'>
               <h3 className='auth-input-name'>Username</h3>
-              <input className='auth-input' onChange={e => this.handleChange('username', e.target.value)}/>
+              <input className='auth-input' onChange={e => this.handleChange('username', e.target.value)} value={this.state.username}/>
               <h3 className='auth-input-name'>Password</h3>
-              <input className='auth-input' onChange={e => this.handleChange('password', e.target.value)}/>
+              <input className='auth-input' onChange={e => this.handleChange('password', e.target.value)} value={this.state.password}/>
             </div>
             <div id='auth-buttons'>
               <button id='auth-login-button'>Login</button>
-              <button id='auth-register-button'>Register</button>
+              <button id='auth-register-button' onClick={() => this.registerUser()}>Register</button>
             </div>
           </div>
         </section>
