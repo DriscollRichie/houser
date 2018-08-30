@@ -4,7 +4,7 @@ const massive = require("massive");
 const bodyParser = require('body-parser')
 const session = require('express-session')
 
-const accountCtrl = require('./controllers/accountCtrl')
+const authCtrl = require('./controllers/authCtrl')
 
 const app = express()
 app.use(bodyParser.json())
@@ -18,7 +18,8 @@ app.use(session({
   resave: false,
 }))
 
-app.post('/api/auth/register', accountCtrl.registerAccount)
+app.post('/api/auth/register', authCtrl.registerAccount)
+app.post('/api/auth/login', authCtrl.accountLogin)
 
 async function startServer() {
   try {

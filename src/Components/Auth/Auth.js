@@ -15,13 +15,23 @@ export default class Auth extends Component {
 
   registerUser = async () => {
     try {
-      console.log('registerUser fn hit')
       const {username, password} = this.state
       let {data: user} = await axios.post('/api/auth/register', {username, password})
       console.log(user)
       this.props.history.push('/dashboard')
     } catch(err) {
       console.error('registerUser function failed in Auth.js:', err)
+    }
+  }
+  
+  userLogin = async () => {
+    try{
+      const {username, password} = this.state
+      let {data: user} = await axios.post('/api/auth/login', {username, password})
+      console.log(user)
+      this.props.history.push('/dashboard')
+    } catch(err) {
+      console.error('userLogin function failed in Auth.js:', err)
     }
   }
 
@@ -38,7 +48,7 @@ export default class Auth extends Component {
               <input className='auth-input' onChange={e => this.handleChange('password', e.target.value)} value={this.state.password}/>
             </div>
             <div id='auth-buttons'>
-              <button id='auth-login-button'>Login</button>
+              <button id='auth-login-button' onClick={() => this.userLogin()}>Login</button>
               <button id='auth-register-button' onClick={() => this.registerUser()}>Register</button>
             </div>
           </div>
