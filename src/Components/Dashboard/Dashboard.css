@@ -1,0 +1,43 @@
+#dashboard-page {
+  background-color: #AFD4C0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#dashboard-nav {
+  background-color: #519872;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  align-items: center;
+  padding-right: 26%;
+  padding-left: 27%;
+}
+
+#dashboard-mid {
+  background-color: #F6F0F0;
+  height: 100%;
+  width: 50%;
+}
+
+#dashboard-title {
+  width: 210px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  justify-content: space-between;
+}
+
+.dashboard-nav-text {
+  font-size: 20px;
+}
+
+nav > p {
+  font-weight: 900
+}

@@ -45,7 +45,7 @@ export default class Auth extends Component {
               <h3 className='auth-input-name'>Username</h3>
               <input className='auth-input' onChange={e => this.handleChange('username', e.target.value)} value={this.state.username}/>
               <h3 className='auth-input-name'>Password</h3>
-              <input className='auth-input' onChange={e => this.handleChange('password', e.target.value)} value={this.state.password}/>
+              <input className='auth-input' type='password' onChange={e => this.handleChange('password', e.target.value)} value={this.state.password}/>
             </div>
             <div id='auth-buttons'>
               <button id='auth-login-button' onClick={() => this.userLogin()}>Login</button>
