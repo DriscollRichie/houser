@@ -5,13 +5,14 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 
 const authCtrl = require('./controllers/authCtrl')
+const propertyCtrl = require('./controllers/propertyCtrl')
 
 const app = express()
 app.use(bodyParser.json())
 
 
 
-let {CONNECTION_STRING, SERVER_PORT, SESSION_SECRET} = process.env
+let { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env
 app.use(session({
   secret: SESSION_SECRET,
   saveUninitialized: true,
@@ -21,13 +22,15 @@ app.use(session({
 app.post('/api/auth/register', authCtrl.registerAccount)
 app.post('/api/auth/login', authCtrl.accountLogin)
 
+app.get('/api/properties', propertyCtrl.getProperties)
+
 async function startServer() {
   try {
-   const db = await massive(CONNECTION_STRING)
-   app.set('db', db)
-   console.log('Connected to Massive')
-   app.listen(SERVER_PORT, () => console.log(`Server is listening on port: ${SERVER_PORT}`))
-  } catch(err) {
+    const db = await massive(CONNECTION_STRING)
+    app.set('db', db)
+    console.log('Connected to Massive')
+    app.listen(SERVER_PORT, () => console.log(`Server is listening on port: ${SERVER_PORT}`))
+  } catch (err) {
     console.error('startServer function failed in server.js:', err)
   }
 }
