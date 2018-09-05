@@ -22,15 +22,22 @@ export default class Dashboard extends Component {
     const properties = this.state.properties.map(e => {
       console.log('e', e)
       return (
-        <div key={e.property_id}>
-          <img src={e.property_image}/>
-          <h2>{e.property_name}</h2>
-          <p>{e.property_description}</p>
-          <p>Loan: {e.property_loan_amount}</p>
-          <p>Monthly Mortgage: {e.property_monthly_mortgage}</p>
-          <p>Desired Rent: {e.property_desired_rent}</p>
-          <p>Address: {e.property_address}</p>
-          <p>City: {e.property_city}</p>
+        <div key={e.property_id} id='dashboard-house-details-container'>
+          <img src={e.property_image} width='150px' height='150px' />
+          <div id='dashboard-house-details-container-left'>
+            <h2 id='property-name'>{e.property_name}</h2>
+            <section id='property-desc-container'>
+              <p id='property-desc'>{e.property_description}</p>
+            </section>
+          </div>
+          <hr id='hr-seperator' />
+          <div id='dashboard-house-details-container-right'>
+            <p id='loan-text'>Loan: ${e.property_loan_amount}</p>
+            <p className='house-details'>Monthly Mortgage: ${e.property_monthly_mortgage}</p>
+            <p className='house-details'>Desired Rent: ${e.property_desired_rent}</p>
+            <p className='house-details'>Address: {e.property_address}</p>
+            <p className='house-details'>City: {e.property_city}</p>
+          </div>
         </div>
       )
     })
@@ -56,9 +63,7 @@ export default class Dashboard extends Component {
           <hr />
           <div id='dashboard-mid-bottom'>
             <h2 id='dashboard-homelist-title'>Home Listings</h2>
-            <div>
-              {properties}
-            </div>
+            {properties}
           </div>
         </section>
       </div>
