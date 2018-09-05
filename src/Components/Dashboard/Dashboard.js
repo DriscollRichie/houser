@@ -5,22 +5,27 @@ import axios from 'axios'
 
 export default class Dashboard extends Component {
   state = {
-    properties: []
+    properties: [],
+    rentFilter: 0
   }
 
   componentDidMount = async () => {
     try {
       let { data: properties } = await axios.get('/api/properties')
-      console.log('properties', properties)
       this.setState({ properties })
     } catch (err) {
       console.error('componentDidMount failed in Dashboard.js:', err)
     }
   }
 
+  handleChange(key, value) {
+    this.setState({[key]: value})
+  }
+
+
+
   render() {
     const properties = this.state.properties.map(e => {
-      console.log('e', e)
       return (
         <div key={e.property_id} id='dashboard-house-details-container'>
           <img src={e.property_image} width='150px' height='150px' />
@@ -56,7 +61,7 @@ export default class Dashboard extends Component {
           <button id='dashboard-add-propertyBtn'>Add new property</button>
           <div id='dashboard-property-filter'>
             <p>List properties with "desired rent" greater then: $</p>
-            <input id='dashboard-filter-input' placeholder='0' />
+            <input id='dashboard-filter-input' placeholder='0' onChange={e => this.handleChange('rentFilter', e.target.value)} value={this.state.rentFilter}/>
             <button className='dashboard-filter-controls'>Filter</button>
             <button className='dashboard-filter-controls'>Reset</button>
           </div>

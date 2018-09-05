@@ -27,7 +27,6 @@ export default class Auth extends Component {
     try{
       const {username, password} = this.state
       let {data: user} = await axios.post('/api/auth/login', {username, password})
-      console.log(user)
       this.props.history.push('/dashboard')
     } catch(err) {
       console.error('userLogin function failed in Auth.js:', err)
