@@ -21,6 +21,10 @@ app.use(session({
 
 app.post('/api/auth/register', authCtrl.registerAccount)
 app.post('/api/auth/login', authCtrl.accountLogin)
+app.post('/api/auth/logout', (req, res, next) => {
+  req.session.destroy()
+  res.sendStatus(200)
+})
 
 app.get('/api/properties', propertyCtrl.getProperties)
 

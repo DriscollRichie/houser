@@ -9,7 +9,6 @@ module.exports = {
         let properties = await db.get_filtered_properties({ account_id, rentFilter })
         res.status(200).send(properties)
       } else {
-        console.log('hit')
         let properties = await db.get_all_properties({ account_id })
         res.status(200).send(properties)
       } 

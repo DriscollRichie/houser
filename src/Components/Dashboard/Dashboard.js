@@ -9,10 +9,18 @@ export default class Dashboard extends Component {
     rentFilter: 0
   }
 
-  componentDidMount = async () => {
+  getAllProperties = async () => {
     try {
       let { data: properties } = await axios.get('/api/properties')
-      this.setState({ properties })
+      this.setState({ properties, rentFilter: '' })
+    } catch (err) {
+      console.error('getAllProperties failed in Dashboard.js:', err)
+    }
+  } 
+
+  componentDidMount = async () => {
+    try {
+      this.getAllProperties()
     } catch (err) {
       console.error('componentDidMount failed in Dashboard.js:', err)
     }
@@ -22,7 +30,24 @@ export default class Dashboard extends Component {
     this.setState({[key]: value})
   }
 
+  filterProperties = async () => {
+    try {
+      const {rentFilter} = this.state
+      let { data: properties } = await axios.get(`/api/properties?rentFilter=${rentFilter}`)
+      this.setState({ properties })
+    }catch(err) {
+      console.error('filterProperties function failed in Dashboard.js:', err)
+    }
+  }
 
+  logoutUser = async () => {
+    try{
+      await axios.post('/api/auth/logout')
+      this.props.history.push('/')
+    }catch(err) {
+      console.error('logoutUser function failed in Dashboard.js:', err)
+    }
+  }
 
   render() {
     const properties = this.state.properties.map(e => {
@@ -55,15 +80,15 @@ export default class Dashboard extends Component {
             <h1 className='dashboard-nav-text'>Houser</h1>
             <p className='dashboard-nav-text'>Dashboard</p>
           </section>
-          <p>Logout</p>
+          <p onClick={() => this.logoutUser()}>Logout</p>
         </nav>
         <section id='dashboard-mid'>
           <button id='dashboard-add-propertyBtn'>Add new property</button>
           <div id='dashboard-property-filter'>
             <p>List properties with "desired rent" greater then: $</p>
             <input id='dashboard-filter-input' placeholder='0' onChange={e => this.handleChange('rentFilter', e.target.value)} value={this.state.rentFilter}/>
-            <button className='dashboard-filter-controls'>Filter</button>
-            <button className='dashboard-filter-controls'>Reset</button>
+            <button className='dashboard-filter-controls' onClick={() => this.filterProperties()}>Filter</button>
+            <button className='dashboard-filter-controls' onClick={() => this.getAllProperties()}>Reset</button>
           </div>
           <hr />
           <div id='dashboard-mid-bottom'>
