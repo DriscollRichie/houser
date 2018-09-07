@@ -105,7 +105,7 @@ hr {
 /* filter text */
 p:first-child {
   position: relative;
-  top: 8px;
+  top: 6px;
   font-weight: 500
 }
 
