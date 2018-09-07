@@ -177,5 +177,11 @@ p:first-child {
 #dashboard-house-details-container-right {
   margin-top: 10px;
   font-weight: 900;
-  margin-right: 1px
+  width: 190px;
+}
+
+#delete-icon {
+  position: relative;
+  top: 5px;
+  /* cursor: pointer */
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Dashboard.css'
 import logo from '../../assets/house_logo.png'
 import axios from 'axios'
+import deleteIcon from '../../assets/delete_icon.png'
 
 export default class Dashboard extends Component {
   state = {
@@ -49,11 +50,20 @@ export default class Dashboard extends Component {
     }
   }
 
+  deleteProperty = async (id) => {
+    try {
+      const {data: properties} = await axios.delete(`/api/properties/${id}`)
+      this.setState({properties})
+    }catch(err) {
+      console.error('deleteProperty function failed in Dashboard.js:', err)
+    }
+  }
+
   render() {
     const properties = this.state.properties.map(e => {
       return (
         <div key={e.property_id} id='dashboard-house-details-container'>
-          <img src={e.property_image} width='150px' height='150px' />
+          <img src={e.property_image} width='150px' height='150px' alt=''/>
           <div id='dashboard-house-details-container-left'>
             <h2 id='property-name'>{e.property_name}</h2>
             <section id='property-desc-container'>
@@ -68,6 +78,7 @@ export default class Dashboard extends Component {
             <p className='house-details'>Address: {e.property_address}</p>
             <p className='house-details'>City: {e.property_city}</p>
           </div>
+          <img style={{ cursor: 'pointer' }} src={deleteIcon} alt='' width='10px' height='12px' id='delete-icon' onClick={() => this.deleteProperty(e.property_id)}/>
         </div>
       )
     })
@@ -76,19 +87,19 @@ export default class Dashboard extends Component {
       <div id='dashboard-page'>
         <nav id='dashboard-nav'>
           <section id='dashboard-title'>
-            <img src={logo} width='25px' />
+            <img src={logo} width='25px' alt=''/>
             <h1 className='dashboard-nav-text'>Houser</h1>
             <p className='dashboard-nav-text'>Dashboard</p>
           </section>
-          <p onClick={() => this.logoutUser()}>Logout</p>
+          <p onClick={() => this.logoutUser()} style={{ cursor: 'pointer' }}>Logout</p>
         </nav>
         <section id='dashboard-mid'>
-          <button id='dashboard-add-propertyBtn'>Add new property</button>
+          <button id='dashboard-add-propertyBtn' style={{ cursor: 'pointer' }}>Add new property</button>
           <div id='dashboard-property-filter'>
             <p>List properties with "desired rent" greater then: $</p>
             <input id='dashboard-filter-input' placeholder='0' onChange={e => this.handleChange('rentFilter', e.target.value)} value={this.state.rentFilter}/>
-            <button className='dashboard-filter-controls' onClick={() => this.filterProperties()}>Filter</button>
-            <button className='dashboard-filter-controls' onClick={() => this.getAllProperties()}>Reset</button>
+            <button style={{ cursor: 'pointer' }} className='dashboard-filter-controls' onClick={() => this.filterProperties()}>Filter</button>
+            <button style={{ cursor: 'pointer' }} className='dashboard-filter-controls' onClick={() => this.getAllProperties()}>Reset</button>
           </div>
           <hr />
           <div id='dashboard-mid-bottom'>

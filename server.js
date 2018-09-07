@@ -27,6 +27,7 @@ app.post('/api/auth/logout', (req, res, next) => {
 })
 
 app.get('/api/properties', propertyCtrl.getProperties)
+app.delete('/api/properties/:id', propertyCtrl.deleteProperty)
 
 async function startServer() {
   try {
