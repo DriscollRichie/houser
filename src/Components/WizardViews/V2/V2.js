@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import logo from '../../../assets/house_logo.png'
 import axios from 'axios'
-import './V1.css'
+import '../V2/V2'
 import step_active from '../../../assets/step_active.png'
 import step_inactive from '../../../assets/step_inactive.png'
-import {Link} from 'react-router-dom'
+import step_complete from '../../../assets/step_completed.png'
 
-export default class V1 extends Component {
+export default class V2 extends Component {
 
   logoutUser = async () => {
     try {
@@ -34,23 +34,32 @@ export default class V1 extends Component {
             <button id='cancel-button'>Cancel</button>
           </div>
           <div id='wizard-mid-2'>
-            <p style={{ marginBottom: '25px' }}>Step 1</p>
+            <p style={{ marginBottom: '25px' }}>Step 2</p>
             <div id='wizard-steps' style={{ marginBottom: '25px' }}>
+              <img src={step_complete} alt='' />
               <img src={step_active} alt='' />
-              <img src={step_inactive} alt='' />
               <img src={step_inactive} alt='' />
               <img src={step_inactive} alt='' />
               <img src={step_inactive} alt='' />
             </div>
             <div id='wizard-forum' style={{ marginBottom: '25px' }}>
-              <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Property Name</h3>
+              <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Address</h3>
               <input className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
-              <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Property Description</h3>
-              <textarea className='wizard-forum-input' style={{ height: '100px' }} />
+              <div id='wizard-forum2'>
+                <div>
+                  <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>City</h3>
+                  <input className='wizard-forum-input-v2' />
+                </div>
+                <div>
+                  <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>State</h3>
+                  <input />
+                </div>
+              </div>
+              <h3>Zip</h3>
+              <input />
+
             </div>
-            <Link to='/wizard/v2'>
-              <button id='next-button'>Next Step</button>
-            </Link>
+            <button id='next-button'>Next Step</button>
           </div>
         </section>
       </div>

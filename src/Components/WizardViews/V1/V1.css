@@ -99,3 +99,9 @@
   font-size: 15px;
   color: white;
 }
+
+#wizard-forum2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}
