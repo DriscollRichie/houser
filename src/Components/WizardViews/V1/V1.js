@@ -4,7 +4,7 @@ import axios from 'axios'
 import './V1.css'
 import step_active from '../../../assets/step_active.png'
 import step_inactive from '../../../assets/step_inactive.png'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class V1 extends Component {
 
@@ -31,7 +31,9 @@ export default class V1 extends Component {
         <section id='wizard-mid'>
           <div id='wizard-mid-1'>
             <h2 style={{ fontSize: '20px' }}>Add new listing</h2>
-            <button id='cancel-button'>Cancel</button>
+            <Link to='/dashboard'>
+              <button id='cancel-button'>Cancel</button>
+            </Link>
           </div>
           <div id='wizard-mid-2'>
             <p style={{ marginBottom: '25px' }}>Step 1</p>
@@ -42,14 +44,14 @@ export default class V1 extends Component {
               <img src={step_inactive} alt='' />
               <img src={step_inactive} alt='' />
             </div>
-            <div id='wizard-forum' style={{ marginBottom: '25px' }}>
+            <div id='wizard-forum'>
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Property Name</h3>
               <input className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Property Description</h3>
               <textarea className='wizard-forum-input' style={{ height: '100px' }} />
             </div>
             <Link to='/wizard/v2'>
-              <button id='next-button'>Next Step</button>
+              <button className='wizard-step-button'>Next Step</button>
             </Link>
           </div>
         </section>

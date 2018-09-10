@@ -61,6 +61,7 @@
   justify-content: center;
   border-radius: 3px;
   font-size: 13px;
+  cursor: pointer;
 }
 
 #wizard-mid-2 {
@@ -79,6 +80,7 @@
 
 #wizard-forum {
   width: 100%;
+  margin-bottom: 60px;
 }
 
 .wizard-forum-input {
@@ -86,7 +88,7 @@
   border: #519872 solid 1px;
 }
 
-#next-button {
+.wizard-step-button {
   background-color: #3b5249;
   font-weight: 800;
   border: none;
@@ -98,10 +100,23 @@
   border-radius: 3px;
   font-size: 15px;
   color: white;
+  cursor: pointer;
 }
 
 #wizard-forum2 {
   display: flex;
   flex-direction: row;
-  justify-content: space-between
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+#wizard-state-forum {
+  position: relative;
+  right: 50px;
+}
+
+#wizard-step-buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
