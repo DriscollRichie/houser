@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './Components/App/App';
 import './reset.css'
 import { HashRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './store'
 
 ReactDOM.render(
-  <HashRouter>
-    <App />
-  </HashRouter>, document.getElementById('root'));
+  <Provider store={store}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Provider>, document.getElementById('root'));

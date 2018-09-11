@@ -5,8 +5,17 @@ import './Wizard.css'
 import step_active from '../../assets/step_active.png'
 import step_inactive from '../../assets/step_inactive.png'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { stepOne } from '../../reducers/newPropertyReducer'
 
-export default class V1 extends Component {
+class V1 extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      propertyName: props.propertyName,
+      propertyDescription: props.propertyDescription
+    }
+  }
 
   logoutUser = async () => {
     try {
@@ -15,6 +24,15 @@ export default class V1 extends Component {
     } catch (err) {
       console.error('logoutUser function failed in Dashboard.js:', err)
     }
+  }
+
+  handleInput(key, value) {
+    this.setState({ [key]: value })
+  }
+
+  addPropertyInfo = () => {
+    const { propertyName, propertyDescription } = this.state
+    this.props.stepOne(propertyName, propertyDescription)
   }
 
   render() {
@@ -46,12 +64,12 @@ export default class V1 extends Component {
             </div>
             <div id='wizard-forum'>
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Property Name</h3>
-              <input className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
+              <input onChange={e => this.handleInput('propertyName', e.target.value)} value={this.state.propertyName} className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Property Description</h3>
-              <textarea className='wizard-forum-input' style={{ height: '100px' }} />
+              <textarea onChange={e => this.handleInput('propertyDescription', e.target.value)} value={this.state.propertyDescription} className='wizard-forum-input' style={{ height: '100px' }} />
             </div>
             <Link to='/wizard/v2'>
-              <button className='wizard-step-button'>Next Step</button>
+              <button className='wizard-step-button' onClick={() => this.addPropertyInfo()}>Next Step</button>
             </Link>
           </div>
         </section>
@@ -59,3 +77,12 @@ export default class V1 extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    propertyName: state.propertyName,
+    propertyDescription: state.propertyDescription
+  }
+}
+
+export default connect(mapStateToProps, { stepOne })(V1)

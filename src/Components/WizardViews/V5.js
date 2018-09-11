@@ -3,7 +3,6 @@ import logo from '../../assets/house_logo.png'
 import axios from 'axios'
 import './Wizard.css'
 import step_active from '../../assets/step_active.png'
-import step_inactive from '../../assets/step_inactive.png'
 import step_complete from '../../assets/step_completed.png'
 import { Link } from 'react-router-dom'
 
