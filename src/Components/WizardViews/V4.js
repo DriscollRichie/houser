@@ -49,13 +49,15 @@ export default class V2 extends Component {
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Loan Amount</h3>
               <input className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Monthly Mortgage</h3>
-              <input className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
+              <input className='wizard-forum-input' style={{height: '25px' }} />
             </div>
             <div id='wizard-step-buttons'>
-              <Link to='/wizard/v2'>
+              <Link to='/wizard/v3'>
                 <button className='wizard-step-button' style={{ width: '155px' }}>Previous Step</button>
               </Link>
+              <Link to='/wizard/v5'>
               <button className='wizard-step-button'>Next Step</button>
+              </Link>
             </div>
           </div>
         </section>

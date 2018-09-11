@@ -47,20 +47,22 @@ export default class V2 extends Component {
             </div>
             <div id='wizard-forum'>
               <div id='wizard-image-preview'>
-                <p style={{color: 'grey'}}>Preview</p>
+                <p style={{ color: 'grey' }}>Preview</p>
               </div>
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Image URL</h3>
-              <input className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
+              <input className='wizard-forum-input' style={{ height: '25px' }} />
             </div>
             <div id='wizard-step-buttons'>
               <Link to='/wizard/v2'>
                 <button className='wizard-step-button' style={{ width: '155px' }}>Previous Step</button>
               </Link>
-              <button className='wizard-step-button'>Next Step</button>
+              <Link to='/wizard/v4'>
+                <button className='wizard-step-button'>Next Step</button>
+              </Link>
             </div>
           </div>
-        </section>
-      </div>
+        </section >
+      </div >
     )
   }
 }

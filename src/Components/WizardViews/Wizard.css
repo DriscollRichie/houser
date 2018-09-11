@@ -131,3 +131,24 @@
   align-items: center;
   margin-bottom: 25px;
 }
+
+#wizard-recommended-rent {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+#wizard-complete-button {
+  background-color: #8aea92;
+  font-weight: 800;
+  border: none;
+  width: 115px;
+  height: 40px;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  border-radius: 3px;
+  font-size: 15px;
+  color: black;
+  cursor: pointer;
+}
