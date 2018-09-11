@@ -120,3 +120,14 @@
   width: 100%;
   justify-content: space-between;
 }
+
+#wizard-image-preview {
+  width: 100%;
+  height: 300px;
+  background-color: lightgrey;
+  border: #519872 solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}

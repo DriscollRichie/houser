@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import logo from '../../../assets/house_logo.png'
+import logo from '../../assets/house_logo.png'
 import axios from 'axios'
-import '../V2/V2'
-import step_active from '../../../assets/step_active.png'
-import step_inactive from '../../../assets/step_inactive.png'
-import step_complete from '../../../assets/step_completed.png'
-import {Link} from 'react-router-dom'
+import './Wizard.css'
+import step_active from '../../assets/step_active.png'
+import step_inactive from '../../assets/step_inactive.png'
+import step_complete from '../../assets/step_completed.png'
+import { Link } from 'react-router-dom'
 
 export default class V2 extends Component {
 
@@ -33,7 +33,7 @@ export default class V2 extends Component {
           <div id='wizard-mid-1'>
             <h2 style={{ fontSize: '20px' }}>Add new listing</h2>
             <Link to='/dashboard'>
-            <button id='cancel-button'>Cancel</button>
+              <button id='cancel-button'>Cancel</button>
             </Link>
           </div>
           <div id='wizard-mid-2'>
@@ -51,21 +51,23 @@ export default class V2 extends Component {
               <div id='wizard-forum2'>
                 <div>
                   <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>City</h3>
-                  <input className='wizard-forum-input'  style={{height: '25px',  width: '200px'}}/>
+                  <input className='wizard-forum-input' style={{ height: '25px', width: '200px' }} />
                 </div>
                 <div id='wizard-state-forum'>
                   <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>State</h3>
-                  <input className='wizard-forum-input' style={{height: '25px', width: '200px'}} />
+                  <input className='wizard-forum-input' style={{ height: '25px', width: '200px' }} />
                 </div>
               </div>
-                <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Zip</h3>
-                <input className='wizard-forum-input' style={{width: '200px', height: '25px'}}/>
+              <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Zip</h3>
+              <input className='wizard-forum-input' style={{ width: '200px', height: '25px' }} />
             </div>
             <div id='wizard-step-buttons'>
-            <Link to='/wizard/v1'>
-            <button className='wizard-step-button' style={{width: '155px'}}>Previous Step</button>
-            </Link>
-            <button className='wizard-step-button'>Next Step</button>
+              <Link to='/wizard/v1'>
+                <button className='wizard-step-button' style={{ width: '155px' }}>Previous Step</button>
+              </Link>
+              <Link to='/wizard/v3'>
+                <button className='wizard-step-button'>Next Step</button>
+              </Link>
             </div>
           </div>
         </section>

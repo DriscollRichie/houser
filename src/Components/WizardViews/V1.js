@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import logo from '../../../assets/house_logo.png'
+import logo from '../../assets/house_logo.png'
 import axios from 'axios'
-import './V1.css'
-import step_active from '../../../assets/step_active.png'
-import step_inactive from '../../../assets/step_inactive.png'
+import './Wizard.css'
+import step_active from '../../assets/step_active.png'
+import step_inactive from '../../assets/step_inactive.png'
 import { Link } from 'react-router-dom'
 
 export default class V1 extends Component {

@@ -2,8 +2,9 @@ import React from 'react'
 import {Switch, Route} from 'react-router-dom'
 import Auth from './Components/Auth/Auth'
 import Dashboard from './Components/Dashboard/Dashboard';
-import V1 from './Components/WizardViews/V1/V1'
-import V2 from './Components/WizardViews/V2/V2'
+import V1 from './Components/WizardViews/V1'
+import V2 from './Components/WizardViews/V2'
+import V3 from './Components/WizardViews/V3'
 
 export default(
   <Switch>
@@ -11,5 +12,6 @@ export default(
     <Route path ='/dashboard' component={Dashboard}/>
     <Route path='/wizard/v1' component={V1}/>
     <Route path='/wizard/v2' component={V2}/>
+    <Route path='/wizard/v3' component={V3}/>
   </Switch>
 )
