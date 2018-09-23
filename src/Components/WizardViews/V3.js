@@ -6,8 +6,24 @@ import step_active from '../../assets/step_active.png'
 import step_inactive from '../../assets/step_inactive.png'
 import step_complete from '../../assets/step_completed.png'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { stepThree } from '../../reducers/newPropertyReducer'
 
-export default class V2 extends Component {
+class V3 extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      propertyImage: props.propertyImage,
+      uploadedImage: false
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  componentDidMount() {
+    if (this.props.propertyImage !== '') {
+      this.setState({ uploadedImage: true })
+    }
+  }
 
   logoutUser = async () => {
     try {
@@ -15,6 +31,14 @@ export default class V2 extends Component {
       this.props.history.push('/')
     } catch (err) {
       console.error('logoutUser function failed in Dashboard.js:', err)
+    }
+  }
+
+  handleChange(event) {
+    if (event.target.files[0]) {
+      this.setState({
+        propertyImage: URL.createObjectURL(event.target.files[0]), uploadedImage: true
+      })
     }
   }
 
@@ -46,18 +70,24 @@ export default class V2 extends Component {
               <img src={step_inactive} alt='' />
             </div>
             <div id='wizard-forum'>
-              <div id='wizard-image-preview'>
-                <p style={{ color: 'grey' }}>Preview</p>
-              </div>
-              <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Image URL</h3>
-              <input className='wizard-forum-input' style={{ height: '25px' }} />
+              {this.state.uploadedImage ?
+                <div>
+                  <img src={this.state.propertyImage} id='wizard-image-preview' />
+                </div>
+                :
+                <div id='wizard-image-preview'>
+                  <p style={{ color: 'grey' }}>Preview</p>
+                </div>
+              }
+              <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Image Upload</h3>
+              <input type='file' onChange={this.handleChange} className='wizard-forum-input' style={{ height: '25px', border: 'none' }} />
             </div>
             <div id='wizard-step-buttons'>
               <Link to='/wizard/v2'>
                 <button className='wizard-step-button' style={{ width: '155px' }}>Previous Step</button>
               </Link>
               <Link to='/wizard/v4'>
-                <button className='wizard-step-button'>Next Step</button>
+                <button className='wizard-step-button' onClick={() => this.props.stepThree(this.state.propertyImage)}>Next Step</button>
               </Link>
             </div>
           </div>
@@ -66,3 +96,11 @@ export default class V2 extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    propertyImage: state.propertyImage
+  }
+}
+
+export default connect(mapStateToProps, { stepThree })(V3)
