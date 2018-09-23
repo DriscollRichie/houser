@@ -6,8 +6,19 @@ import step_active from '../../assets/step_active.png'
 import step_inactive from '../../assets/step_inactive.png'
 import step_complete from '../../assets/step_completed.png'
 import { Link } from 'react-router-dom'
+import {connect} from 'react-redux'
+import {stepTwo} from '../../reducers/newPropertyReducer'
 
-export default class V2 extends Component {
+class V2 extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      propertyAddress: props.propertyAddress,
+      propertyState: props.propertyState,
+      propertyCity: props.propertyCity,
+      propertyZip: props.propertyZip,
+    }
+  }
 
   logoutUser = async () => {
     try {
@@ -16,6 +27,10 @@ export default class V2 extends Component {
     } catch (err) {
       console.error('logoutUser function failed in Dashboard.js:', err)
     }
+  }
+
+  handleInput(key, value) {
+    this.setState({ [key]: value })
   }
 
   render() {
@@ -47,26 +62,26 @@ export default class V2 extends Component {
             </div>
             <div id='wizard-forum'>
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Address</h3>
-              <input className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
+              <input onChange={e => this.handleInput('propertyAddress', e.target.value)} value={this.state.propertyAddress} className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
               <div id='wizard-forum2'>
                 <div>
                   <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>City</h3>
-                  <input className='wizard-forum-input' style={{ height: '25px', width: '200px' }} />
+                  <input onChange={e => this.handleInput('propertyCity', e.target.value)} value={this.state.propertyCity} className='wizard-forum-input' style={{ height: '25px', width: '200px' }} />
                 </div>
                 <div id='wizard-state-forum'>
                   <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>State</h3>
-                  <input className='wizard-forum-input' style={{ height: '25px', width: '200px' }} />
+                  <input onChange={e => this.handleInput('propertyState', e.target.value)} value={this.state.propertyState} className='wizard-forum-input' style={{ height: '25px', width: '200px' }} />
                 </div>
               </div>
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Zip</h3>
-              <input className='wizard-forum-input' style={{ width: '200px', height: '25px' }} />
+              <input onChange={e => this.handleInput('propertyZip', e.target.value)} value={this.state.propertyZip} className='wizard-forum-input' style={{ width: '200px', height: '25px' }} />
             </div>
             <div id='wizard-step-buttons'>
               <Link to='/wizard/v1'>
                 <button className='wizard-step-button' style={{ width: '155px' }}>Previous Step</button>
               </Link>
               <Link to='/wizard/v3'>
-                <button className='wizard-step-button'>Next Step</button>
+                <button className='wizard-step-button' onClick={() => this.props.stepTwo(this.state.propertyAddress, this.state.propertyCity, this.state.propertyState, this.state.propertyZip)}>Next Step</button>
               </Link>
             </div>
           </div>
@@ -75,3 +90,14 @@ export default class V2 extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    propertyAddress: state.propertyAddress,
+    propertyCity: state.propertyCity,
+    propertyState: state.propertyState,
+    propertyZip: state.propertyZip
+  }
+}
+
+export default connect(mapStateToProps, {stepTwo})(V2)
