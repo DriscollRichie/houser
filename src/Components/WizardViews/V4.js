@@ -6,8 +6,17 @@ import step_active from '../../assets/step_active.png'
 import step_inactive from '../../assets/step_inactive.png'
 import step_complete from '../../assets/step_completed.png'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import {stepFour} from '../../reducers/newPropertyReducer'
 
-export default class V2 extends Component {
+class V4 extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      loanAmount: this.props.loanAmount,
+      monthlyMortgage: this.props.monthlyMortgage
+    }
+  }
 
   logoutUser = async () => {
     try {
@@ -16,6 +25,10 @@ export default class V2 extends Component {
     } catch (err) {
       console.error('logoutUser function failed in Dashboard.js:', err)
     }
+  }
+
+  handleInput(key, value) {
+    this.setState({[key]: value})
   }
 
   render() {
@@ -47,16 +60,16 @@ export default class V2 extends Component {
             </div>
             <div id='wizard-forum'>
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Loan Amount</h3>
-              <input className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} />
+              <input className='wizard-forum-input' style={{ marginBottom: '25px', height: '25px' }} onChange={e => this.handleInput('loanAmount', e.target.value)} value={this.state.loanAmount}/>
               <h3 style={{ marginBottom: '5px', marginLeft: '15px' }}>Monthly Mortgage</h3>
-              <input className='wizard-forum-input' style={{height: '25px' }} />
+              <input className='wizard-forum-input' style={{ height: '25px' }} onChange={e => this.handleInput('monthlyMortgage', e.target.value)} value={this.state.monthlyMortgage}/>
             </div>
             <div id='wizard-step-buttons'>
               <Link to='/wizard/v3'>
                 <button className='wizard-step-button' style={{ width: '155px' }}>Previous Step</button>
               </Link>
               <Link to='/wizard/v5'>
-              <button className='wizard-step-button'>Next Step</button>
+                <button className='wizard-step-button' onClick={() => this.props.stepFour(this.state.loanAmount, this.state.monthlyMortgage)}>Next Step</button>
               </Link>
             </div>
           </div>
@@ -65,3 +78,11 @@ export default class V2 extends Component {
     )
   }
 }
+function mapStateToProps(state) {
+  return {
+    loanAmount: state.loanAmount,
+    monthlyMortgage: state.monthlyMortgage
+  }
+}
+
+export default connect(mapStateToProps, {stepFour})(V4)

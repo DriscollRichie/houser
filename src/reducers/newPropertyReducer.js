@@ -14,6 +14,7 @@ const initalState = {
 const STEP_ONE = "STEP_ONE"
 const STEP_TWO = "STEP_TWO"
 const STEP_THREE = "STEP_THREE"
+const STEP_FOUR = "STEP_FOUR"
 
 export default function reducer(state = initalState, action) {
   switch (action.type) {
@@ -23,6 +24,8 @@ export default function reducer(state = initalState, action) {
       return Object.assign({}, state, { propertyAddress: action.payload.propertyAddress, propertyCity: action.payload.propertyCity, propertyState: action.payload.propertyState, propertyZip: action.payload.propertyZip })
     case STEP_THREE:
       return Object.assign({}, state, {propertyImage: action.payload.propertyImage})
+    case STEP_FOUR:
+      return Object.assign({}, state, {loanAmount: action.payload.loanAmount, monthlyMortgage: action.payload.monthlyMortgage})
     default:
       return state
   }
@@ -54,6 +57,16 @@ export function stepThree(propertyImage) {
     type: STEP_THREE,
     payload: {
       propertyImage
+    }
+  }
+}
+
+export function stepFour(loanAmount, monthlyMortgage) {
+  return {
+    type: STEP_FOUR,
+    payload: {
+      loanAmount,
+      monthlyMortgage
     }
   }
 }

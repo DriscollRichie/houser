@@ -6,7 +6,7 @@ import step_active from '../../assets/step_active.png'
 import step_complete from '../../assets/step_completed.png'
 import { Link } from 'react-router-dom'
 
-export default class V2 extends Component {
+export default class V5 extends Component {
 
   logoutUser = async () => {
     try {
