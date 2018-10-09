@@ -33,5 +33,43 @@ module.exports = {
       res.sendStatus(500)
       console.error('deleteProperty function failed in propertyCtrl.js:', err)
     }
+  },
+
+  addProperty: async (req, res) => {
+    try {
+      const db = req.app.get('db')
+
+      const { propertyName,
+        propertyDescription,
+        propertyAddress,
+        propertyCity,
+        propertyState,
+        propertyZip,
+        propertyImage,
+        loanAmount,
+        monthlyMortgage,
+        desiredRent } = req.body.state
+        
+
+      const { account_id } = req.session.user
+
+      await db.add_property({
+        propertyName,
+        propertyDescription,
+        propertyAddress,
+        propertyCity,
+        propertyState,
+        propertyZip,
+        propertyImage,
+        loanAmount,
+        monthlyMortgage,
+        desiredRent,
+        account_id
+      })
+      res.sendStatus(200)
+    } catch (err) {
+      res.sendStatus(500)
+      console.error('addProperty function failed in propertyCtrl.js:', err)
+    }
   }
 }

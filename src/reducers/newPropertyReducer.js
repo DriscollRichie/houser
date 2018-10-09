@@ -15,6 +15,7 @@ const STEP_ONE = "STEP_ONE"
 const STEP_TWO = "STEP_TWO"
 const STEP_THREE = "STEP_THREE"
 const STEP_FOUR = "STEP_FOUR"
+const STEP_FIVE = "STEP_FIVE"
 
 export default function reducer(state = initalState, action) {
   switch (action.type) {
@@ -26,6 +27,8 @@ export default function reducer(state = initalState, action) {
       return Object.assign({}, state, {propertyImage: action.payload.propertyImage})
     case STEP_FOUR:
       return Object.assign({}, state, {loanAmount: action.payload.loanAmount, monthlyMortgage: action.payload.monthlyMortgage})
+    case STEP_FIVE:
+      return Object.assign({}, state, {desiredRent: action.payload.desiredRent})
     default:
       return state
   }
@@ -67,6 +70,15 @@ export function stepFour(loanAmount, monthlyMortgage) {
     payload: {
       loanAmount,
       monthlyMortgage
+    }
+  }
+}
+
+export function stepFive(desiredRent) {
+  return {
+    type: STEP_FIVE,
+    payload: {
+      desiredRent
     }
   }
 }
